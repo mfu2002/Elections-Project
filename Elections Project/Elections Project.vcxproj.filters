@@ -13,10 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\models">
+      <UniqueIdentifier>{1dcc2806-9eda-4a58-b315-731f91f34725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Voter.h">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="VotingSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Candidate.h">
+      <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="VotingSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
