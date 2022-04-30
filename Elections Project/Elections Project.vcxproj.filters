@@ -27,15 +27,18 @@
     <ClCompile Include="VotingSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Candidate.h">
       <Filter>Source Files\models</Filter>
     </ClInclude>
-    <ClInclude Include="Source.h">
-      <Filter>Source Files\models</Filter>
-    </ClInclude>
     <ClInclude Include="VotingSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

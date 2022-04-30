@@ -10,22 +10,10 @@ using namespace std;
 class VotingSystem
 {
 public:
-	VotingSystem();
-	~VotingSystem();
 	void execute();
 
 
 private:
-	/// <summary>
-	/// Stores all the candidate information in the memory.
-	/// </summary>
-	vector<Candidate> candidates = vector<Candidate>();
-
-	/// <summary>
-	/// Stores all the voter information in the memory.
-	/// </summary>
-	vector<Voter> voters = vector<Voter>();
-
 	/// <summary>
 	/// 
 	/// </summary>
@@ -35,8 +23,6 @@ private:
 	/// 
 	/// </summary>
 	const string candidateFileName = "Candidate.txt";
-
-	bool dataChanged = false;
 
 
 	/// <summary>
@@ -73,22 +59,33 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	void saveVoterData();
+	/// <returns></returns>
+	vector<Voter> loadVoterData();
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	vector<Candidate> loadCandidateData();
+
 
 	/// <summary>
 	/// 
 	/// </summary>
-	void saveCandidateData();
+	/// <param name="id"></param>
+	/// <param name="file"></param>
+	/// <param name="recordLength"></param>
+	/// <param name="idLength"></param>
+	/// <returns></returns>
+	int findRecordWithId(const char* id, fstream* file, int recordLength, int idLength);
 
 	/// <summary>
 	/// 
 	/// </summary>
-	void loadVoterData();
+	void addVoter();
 
 	/// <summary>
 	/// 
 	/// </summary>
-	void loadCandidateData();
-
+	void AddCandidate();
 };
 
