@@ -6,13 +6,11 @@
 using namespace std;
 
 void VotingSystem::execute() {
-	bool running = true;
-	int option = -1;
+	char option = -1;
 
-
-	while (running)
+	while (option != 'Q')
 	{
-		int option = selectMenuOption();
+		option = selectMenuOption();
 		switch (option)
 		{
 		case 'P':
@@ -32,9 +30,6 @@ void VotingSystem::execute() {
 			break;
 		case 'C':
 			AddCandidate();
-			break;
-		case 'Q':
-			running = false;
 			break;
 		}
 	}
