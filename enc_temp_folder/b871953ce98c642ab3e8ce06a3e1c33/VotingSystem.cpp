@@ -9,6 +9,7 @@ void VotingSystem::execute() {
 	bool running = true;
 	int option = -1;
 
+	auto test = loadVoterData();
 
 	while (running)
 	{
