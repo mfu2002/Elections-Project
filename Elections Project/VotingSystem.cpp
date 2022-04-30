@@ -8,6 +8,9 @@ using namespace std;
 void VotingSystem::execute() {
 	bool running = true;
 	int option = -1;
+
+	auto test = loadCandidateData();
+
 	while (running)
 	{
 		int option = selectMenuOption();
@@ -39,7 +42,7 @@ void VotingSystem::execute() {
 }
 
 char VotingSystem::selectMenuOption() {
-	return 'P';
+	return 'A';
 }
 
 void VotingSystem::displayCandidateInfo() {
@@ -128,7 +131,7 @@ void VotingSystem::addVotes() {
 
 int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLength, const int idLength) {
 	int pos = 0;
-	char* currentId = new char[idLength+1];  // +1 because readline returns a corrupted ending.  
+	char* currentId = new char[idLength + 1];  // +1 because readline returns a corrupted ending.  
 	file->seekg(pos);
 
 	while (file->peek() != -1)
@@ -136,7 +139,8 @@ int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLeng
 		file->read(currentId, idLength);
 		currentId[idLength] = 0; // to remove that corrupted ending and set it to null;
 		strtrim(currentId);
-		if (*currentId == *id) {
+
+		if (strcmp(currentId, id) == 0) {
 			delete[] currentId;
 			return pos;
 		}
@@ -258,7 +262,12 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 		candidateFile.read(candidate->suburb, Candidate::suburbSize);
 		candidateFile.read(candidate->postcode, Candidate::postcodeSize);
 
-		
+		strtrim(candidate->candidateId);
+		strtrim(candidate->firstName);
+		strtrim(candidate->lastName);
+		strtrim(candidate->suburb);
+		strtrim(candidate->postcode);
+
 
 		candidates.push_back(*candidate);
 	}

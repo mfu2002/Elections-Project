@@ -1,3 +1,3 @@
-12        1Faisal                        Karim                         Hampton                       3976
+12        0Faisal                        Karim                         Hampton                       3976
 42        0Kanzah                        Fatima                        Sunshine                      8524
-75        0Karim                         Mohammad                      7412                          7412
+75        1Karim                         Mohammad                      7412                          7412
