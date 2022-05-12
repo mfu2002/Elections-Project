@@ -8,6 +8,8 @@ using namespace std;
 void VotingSystem::execute() {
 	char option = -1;
 
+	//Splash Screen input
+
 	while (option != 'Q')
 	{
 		option = selectMenuOption();
