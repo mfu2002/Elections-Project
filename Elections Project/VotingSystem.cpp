@@ -6,9 +6,10 @@
 using namespace std;
 
 void VotingSystem::execute() {
-	char option = -1;
 
-	//Splash Screen input
+	splashScreen();
+
+	char option = -1;
 
 	while (option != 'Q')
 	{
@@ -31,10 +32,14 @@ void VotingSystem::execute() {
 			addVoter();
 			break;
 		case 'C':
-			AddCandidate();
+			addCandidate();
 			break;
 		}
 	}
+}
+
+void VotingSystem::splashScreen() {
+
 }
 
 char VotingSystem::selectMenuOption() {
@@ -183,7 +188,7 @@ void VotingSystem::addVoter() {
 	voterFile.close();
 }
 
-void VotingSystem::AddCandidate() {
+void VotingSystem::addCandidate() {
 	Candidate candidate = Candidate();
 	cout << "Candidate Id: ";
 	cin >> candidate.candidateId;

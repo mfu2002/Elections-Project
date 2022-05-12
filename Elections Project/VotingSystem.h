@@ -39,6 +39,11 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
+	void splashScreen();
+
+	/// <summary>
+	/// 
+	/// </summary>
 	void displayCandidateInfo();
 
 	/// <summary>
@@ -86,6 +91,6 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	void AddCandidate();
+	void addCandidate();
 };
 
