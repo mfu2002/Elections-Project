@@ -39,6 +39,11 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
+	void splashScreen();
+
+	/// <summary>
+	/// 
+	/// </summary>
 	void displayCandidateInfo();
 
 	/// <summary>
