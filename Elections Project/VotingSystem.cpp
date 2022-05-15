@@ -100,7 +100,7 @@ void VotingSystem::addVotes() {
 		cout << "Invalid candidate id. Please try again: ";
 		cin >> candidateId;
 
-		int candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
+		candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
 	}
 
 
