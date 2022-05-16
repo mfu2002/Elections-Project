@@ -8,7 +8,7 @@ using namespace std;
 void VotingSystem::execute() {
 
 	splashScreen();
-
+	int one = 0; // workaround for case p
 	char option = -1;
 
 	while (option != 'Q')
@@ -17,7 +17,8 @@ void VotingSystem::execute() {
 		switch (option)
 		{
 		case 'P':
-			displayCandidateInfo();
+			displayCandidateInfo(one);
+			one++;
 			break;
 		case 'A':
 			addVotes();
@@ -43,10 +44,25 @@ void VotingSystem::splashScreen() {
 }
 
 char VotingSystem::selectMenuOption() {
-	return 'A';
+	return 'P';
 }
 
-void VotingSystem::displayCandidateInfo() {
+void VotingSystem::displayCandidateInfo(int one) {
+	//gets to here
+	vector<Candidate> CandidateData = loadCandidateData();
+		if (one == 0) {
+			int count = 0;
+			while (count < CandidateData.size()) {
+		
+				//cout << candidateInfo[count].firstName; // for testing
+				//cout << "test";
+				cout << "Candidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
+				<< "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << "Candidate ID: " << CandidateData[count].candidateId << endl;
+
+
+				count++;
+			}
+		}
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
 }
