@@ -44,7 +44,7 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	void displayCandidateInfo();
+	void displayCandidateInfo(int);
 
 	/// <summary>
 	/// Allows the user to select a candidate and a voter. And then vote for the candidate on behalf of of the voter if they haven't already voted.
@@ -91,6 +91,6 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	void AddCandidate();
+	void addCandidate();
 };
 

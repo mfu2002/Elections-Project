@@ -8,15 +8,17 @@ using namespace std;
 void VotingSystem::execute() {
 
 	splashScreen();
-
+	int one = 0; // workaround for case p
 	char option = -1;
+
 	while (option != 'Q')
 	{
 		option = selectMenuOption();
 		switch (option)
 		{
 		case 'P':
-			displayCandidateInfo();
+			displayCandidateInfo(one);
+			one++;
 			break;
 		case 'A':
 			addVotes();
@@ -31,7 +33,7 @@ void VotingSystem::execute() {
 			addVoter();
 			break;
 		case 'C':
-			AddCandidate();
+			addCandidate();
 			break;
 		}
 	}
@@ -42,10 +44,25 @@ void VotingSystem::splashScreen() {
 }
 
 char VotingSystem::selectMenuOption() {
-	return 'A';
+	return 'P';
 }
 
-void VotingSystem::displayCandidateInfo() {
+void VotingSystem::displayCandidateInfo(int one) {
+	//gets to here
+	vector<Candidate> CandidateData = loadCandidateData();
+		if (one == 0) {
+			int count = 0;
+			while (count < CandidateData.size()) {
+		
+				//cout << candidateInfo[count].firstName; // for testing
+				//cout << "test";
+				cout << "Candidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
+				<< "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << "Candidate ID: " << CandidateData[count].candidateId << endl;
+
+
+				count++;
+			}
+		}
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
 }
@@ -99,7 +116,7 @@ void VotingSystem::addVotes() {
 		cout << "Invalid candidate id. Please try again: ";
 		cin >> candidateId;
 
-		int candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
+		candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
 	}
 
 
@@ -187,7 +204,7 @@ void VotingSystem::addVoter() {
 	voterFile.close();
 }
 
-void VotingSystem::AddCandidate() {
+void VotingSystem::addCandidate() {
 	Candidate candidate = Candidate();
 	cout << "Candidate Id: ";
 	cin >> candidate.candidateId;
