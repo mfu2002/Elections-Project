@@ -113,7 +113,7 @@ void VotingSystem::addVotes() {
 	candidateFile.seekg(votesLocation);
 	candidateFile.read(votesChar, Candidate::votesSize);
 	votesChar[Candidate::votesSize] = 0;
-	strtrim(votesChar);
+	strStrip(votesChar);
 	int votes = stoi(votesChar);
 	votes++;
 
@@ -138,7 +138,7 @@ int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLeng
 	{
 		file->read(currentId, idLength);
 		currentId[idLength] = 0; // to remove that corrupted ending and set it to null;
-		strtrim(currentId);
+		strStrip(currentId);
 
 		if (strcmp(currentId, id) == 0) {
 			delete[] currentId;
@@ -248,10 +248,10 @@ vector<Voter> VotingSystem::loadVoterData() {
 		suburb[Voter::suburbSize] = 0;
 
 
-		strtrim(id);
-		strtrim(firstName);
-		strtrim(lastName);
-		strtrim(suburb);
+		strStrip(id);
+		strStrip(firstName);
+		strStrip(lastName);
+		strStrip(suburb);
 
 		strcpy_s(voter.voterId, id);
 		strcpy_s(voter.firstName, firstName);
@@ -293,10 +293,10 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 		suburb[Candidate::suburbSize] = 0;
 		
 
-		strtrim(id);
-		strtrim(firstName);
-		strtrim(lastName);
-		strtrim(suburb);
+		strStrip(id);
+		strStrip(firstName);
+		strStrip(lastName);
+		strStrip(suburb);
 
 		strcpy_s(candidate.candidateId, id);
 		strcpy_s(candidate.firstName, firstName);
