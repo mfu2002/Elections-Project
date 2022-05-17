@@ -6,6 +6,4 @@ MENU:
     S - Display the smallest number of votes candidate 
     L - Display the largest number of votes candidate 
     Q - Quit 
-
-                                                          
-               
+                                                                 
