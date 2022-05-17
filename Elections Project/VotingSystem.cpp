@@ -44,7 +44,7 @@ void VotingSystem::execute() {
 	}
 }
 
-void VotingSystem::splashScreen() 
+void VotingSystem::splashScreen() //logo
 {
 	string splashScreen;
 
@@ -61,7 +61,7 @@ void VotingSystem::splashScreen()
 
 }
 
-void splash() //logo plus loading screen
+void splash() //loading animation
 {
 	HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H, 2);
@@ -89,7 +89,7 @@ void delay(int length) //Allows for loading animation
 
 	time = length * 1e6;
 
-	for (int j = 0; j < time; j++)
+	for (int j = 0; j < time; j++) 
 	{
 		increase *= j;
 		increase++;
@@ -165,12 +165,19 @@ char VotingSystem::selectMenuOption()
 	}
 	default:
 	{
-		selectMenuOption(); //Reverts back to menu with invlaid input
+		for (int h = 0; h < 1; h++)
+		{
+			cout << "Invalid Input - Please Try Again: ";
+
+			delay(50);
+		}
+
+		system("cls");
 	}
 	}
 
+	system("cls");
 	return result;
-
 }
 
 void VotingSystem::displayCandidateInfo(int one) {
