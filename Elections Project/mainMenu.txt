@@ -1,6 +1,6 @@
 
                                                   FLASH INDUSTRIES
-MENU:
+ MENU:
 
     P - Print numbers for a particular candidate
     A - Add number of votes to a candidate
