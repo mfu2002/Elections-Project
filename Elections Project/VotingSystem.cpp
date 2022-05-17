@@ -9,7 +9,7 @@ using namespace std;
 void VotingSystem::execute() {
 
 	splashScreen();
-
+	int one = 0; // workaround for case p
 	char option = -1;
 
 	while (option != 'Q')
@@ -18,7 +18,8 @@ void VotingSystem::execute() {
 		switch (option)
 		{
 		case 'P':
-			displayCandidateInfo();
+			displayCandidateInfo(one);
+			one++;
 			break;
 		case 'A':
 			addVotes();
@@ -43,10 +44,18 @@ void VotingSystem::splashScreen() {
 
 }
 
-char VotingSystem::selectMenuOption() {
-	
+char VotingSystem::selectMenuOption() 
+{
 	string mainMenu;
 	char selection, result;
+	
+//Colours
+
+//#define Green 0x0000
+//
+//	HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
+//	SetConsoleTextAttribute(H, Green);
+
 
 	ifstream MyReadFile("filename.txt");
 
@@ -103,15 +112,31 @@ char VotingSystem::selectMenuOption() {
 	}
 	default:
 	{
-		cout << "Please select from the valid options:" << "" << endl;
+		cout << "Valid Options: P, A, S, L, V, C, Q " << "" << endl;
 		selectMenuOption();
 	}
 	}
 
 	return result;
+
 }
 
-void VotingSystem::displayCandidateInfo() {
+void VotingSystem::displayCandidateInfo(int one) {
+	//gets to here
+	vector<Candidate> CandidateData = loadCandidateData();
+		if (one == 0) {
+			int count = 0;
+			while (count < CandidateData.size()) {
+		
+				//cout << candidateInfo[count].firstName; // for testing
+				//cout << "test";
+				cout << "Candidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
+				<< "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << "Candidate ID: " << CandidateData[count].candidateId << endl;
+
+
+				count++;
+			}
+		}
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
 }
@@ -165,7 +190,7 @@ void VotingSystem::addVotes() {
 		cout << "Invalid candidate id. Please try again: ";
 		cin >> candidateId;
 
-		int candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
+		candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
 	}
 
 
@@ -179,7 +204,7 @@ void VotingSystem::addVotes() {
 	candidateFile.seekg(votesLocation);
 	candidateFile.read(votesChar, Candidate::votesSize);
 	votesChar[Candidate::votesSize] = 0;
-	strtrim(votesChar);
+	strStrip(votesChar);
 	int votes = stoi(votesChar);
 	votes++;
 
@@ -204,7 +229,7 @@ int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLeng
 	{
 		file->read(currentId, idLength);
 		currentId[idLength] = 0; // to remove that corrupted ending and set it to null;
-		strtrim(currentId);
+		strStrip(currentId);
 
 		if (strcmp(currentId, id) == 0) {
 			delete[] currentId;
@@ -314,10 +339,10 @@ vector<Voter> VotingSystem::loadVoterData() {
 		suburb[Voter::suburbSize] = 0;
 
 
-		strtrim(id);
-		strtrim(firstName);
-		strtrim(lastName);
-		strtrim(suburb);
+		strStrip(id);
+		strStrip(firstName);
+		strStrip(lastName);
+		strStrip(suburb);
 
 		strcpy_s(voter.voterId, id);
 		strcpy_s(voter.firstName, firstName);
@@ -359,10 +384,10 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 		suburb[Candidate::suburbSize] = 0;
 		
 
-		strtrim(id);
-		strtrim(firstName);
-		strtrim(lastName);
-		strtrim(suburb);
+		strStrip(id);
+		strStrip(firstName);
+		strStrip(lastName);
+		strStrip(suburb);
 
 		strcpy_s(candidate.candidateId, id);
 		strcpy_s(candidate.firstName, firstName);

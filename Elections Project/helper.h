@@ -4,4 +4,4 @@
 /// 
 /// </summary>
 /// <param name="str"></param>
-void strtrim(char* str);
+void strStrip(char* str);
