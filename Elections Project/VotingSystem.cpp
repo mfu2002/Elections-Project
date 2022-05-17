@@ -1,10 +1,14 @@
-#include "VotingSystem.h"
+﻿#include "VotingSystem.h"
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include "helper.h"
 #include <Windows.h>
+#include <dos.h>
 using namespace std;
+
+void splash();
+void delay(int length);
 
 void VotingSystem::execute() {
 
@@ -40,35 +44,84 @@ void VotingSystem::execute() {
 	}
 }
 
-void VotingSystem::splashScreen() {
+void VotingSystem::splashScreen() 
+{
+	string splashScreen;
 
+	ifstream MyReadFile("splashScreen.txt");
+
+	while (getline(MyReadFile, splashScreen))
+	{
+		cout << splashScreen << endl;
+	}
+
+	MyReadFile.close();
+
+	splash();
+
+}
+
+void splash() //logo plus loading screen
+{
+	HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H, 2);
+
+	cout << "      INITIALISING: ";
+
+	char x = 219;
+
+	cout << x;
+
+	for (int i = 0; i < 32; i++)
+	{
+		delay(9);
+		cout << x;
+	}
+
+	SetConsoleTextAttribute(H, 7);
+
+	system("cls");
+}
+
+void delay(int length) //Allows for loading animation
+{
+	int increase = 0, time;
+
+	time = length * 1e6;
+
+	for (int j = 0; j < time; j++)
+	{
+		increase *= j;
+		increase++;
+		increase++;
+	}
 }
 
 char VotingSystem::selectMenuOption() 
 {
+
+	HANDLE G = GetStdHandle(STD_OUTPUT_HANDLE); //Light Blue Menu
+	SetConsoleTextAttribute(G, 3);
+
 	string mainMenu;
-	char selection, result;
-	
-//Colours
+	char selection, result = ' ';
 
-//#define Green 0x0000
-//
-//	HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
-//	SetConsoleTextAttribute(H, Green);
-
-
-	ifstream MyReadFile("filename.txt");
+	ifstream MyReadFile("mainMenu.txt");
 
 	while (getline(MyReadFile, mainMenu)) 
 	{
-		cout << mainMenu;
+		cout << mainMenu << endl;
 	}
 
 	MyReadFile.close();
+
+	SetConsoleTextAttribute(G, 7); //Reverts Colour Back To White
+
+	cout << "Enter Selection: ";
 	
 	cin >> selection;
 
-	switch (selection)
+	switch (selection) //Ensures that both lower and upper case accepted. 
 	{
 	case 'P':
 	case 'p':
@@ -112,8 +165,7 @@ char VotingSystem::selectMenuOption()
 	}
 	default:
 	{
-		cout << "Valid Options: P, A, S, L, V, C, Q " << "" << endl;
-		selectMenuOption();
+		selectMenuOption(); //Reverts back to menu with invlaid input
 	}
 	}
 
