@@ -1,11 +1,11 @@
 
-                                           FLASH INDUSTRIES
+                                                  FLASH INDUSTRIES
 MENU:
 
     P - Print numbers for a particular candidate
     A - Add number of votes to a candidate
-    S - Display the smallest number of votes candidate 
-    L - Display the largest number of votes candidate 
+    S - Display the candidate with the smallest number of votes 
+    L - Display the candidate with the largest number of votes
     Q - Quit 
                                                                  
 
