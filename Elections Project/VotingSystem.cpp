@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include "helper.h"
+#include <Windows.h>
 using namespace std;
 
 void VotingSystem::execute() {
@@ -43,7 +44,71 @@ void VotingSystem::splashScreen() {
 }
 
 char VotingSystem::selectMenuOption() {
-	return 'A';
+	
+	string mainMenu;
+	char selection, result;
+
+	ifstream MyReadFile("filename.txt");
+
+	while (getline(MyReadFile, mainMenu)) 
+	{
+		cout << mainMenu;
+	}
+
+	MyReadFile.close();
+	
+	cin >> selection;
+
+	switch (selection)
+	{
+	case 'P':
+	case 'p':
+	{
+		result = 'P';
+		break;
+	}
+	case 'A':
+	case 'a':
+	{
+		result = 'A';
+		break;
+	}
+	case 'S' || 's':
+		result = 'S';
+		break;
+
+	case 'L':
+	case 'l':
+	{
+		result = 'L';
+		break;
+	}
+	case 'V':
+	case 'v':
+	{
+		result = 'V';
+		break;
+	}
+	case 'C':
+	case 'c':
+	{
+		result = 'C';
+		break;
+	}
+	case 'Q':
+	case 'q':
+	{
+		result = 'Q';
+		break;
+	}
+	default:
+	{
+		cout << "Please select from the valid options:" << << endl;
+		selectMenuOption();
+	}
+	}
+
+	return result;
 }
 
 void VotingSystem::displayCandidateInfo() {
