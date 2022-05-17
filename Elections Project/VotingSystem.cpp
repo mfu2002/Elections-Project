@@ -103,7 +103,7 @@ char VotingSystem::selectMenuOption() {
 	}
 	default:
 	{
-		cout << "Please select from the valid options:" << << endl;
+		cout << "Please select from the valid options:" << "" << endl;
 		selectMenuOption();
 	}
 	}
