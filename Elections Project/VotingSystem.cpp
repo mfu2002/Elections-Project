@@ -5,12 +5,20 @@
 #include "helper.h"
 #include <Windows.h>
 #include <dos.h>
+
+//Imports the correct file depending on whether the software is running on windows or linux. 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
 using namespace std;
 
 void VotingSystem::execute() {
 
+	//Splash screen
 	splashScreen();
-	char option = -1;
+	char option = -1; // initialised to -1 because the value is not chosen. -1 because all characters can be represented as byte. 
 
 	while (option != 'Q')
 	{
@@ -39,10 +47,10 @@ void VotingSystem::execute() {
 	}
 }
 
-void VotingSystem::splashScreen() //logo
+void VotingSystem::splashScreen()
 {
 	string splashScreen;
-
+	// loads the splashscreen information from the file.
 	ifstream MyReadFile("splashScreen.txt");
 
 	while (getline(MyReadFile, splashScreen))
@@ -56,7 +64,7 @@ void VotingSystem::splashScreen() //logo
 
 }
 
-void splash() //loading animation
+void VotingSystem::splash()
 {
 	HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H, 2);
@@ -69,27 +77,13 @@ void splash() //loading animation
 
 	for (int i = 0; i < 32; i++)
 	{
-		delay(5);
+		Sleep(50); //stops the thread for 50ms.
 		cout << x;
 	}
 
 	SetConsoleTextAttribute(H, 7);
 
 	system("cls");
-}
-
-void delay(int length) //Allows for loading animation
-{
-	int increase = 0, time;
-
-	time = length * 1e6;
-
-	for (int j = 0; j < time; j++) 
-	{
-		increase *= j;
-		increase++;
-		increase++;
-	}
 }
 
 char VotingSystem::selectMenuOption() 
@@ -161,12 +155,10 @@ char VotingSystem::selectMenuOption()
 	}
 	default:
 	{
-		for (int h = 0; h < 1; h++)
-		{
-			cout << "Invalid Input - Please Try Again: ";
+		cout << "Invalid Input - Please Try Again";
 
-			delay(10);
-		}
+		Sleep(1000); //Stops the tread for 1sec for the user to read. 
+
 
 		system("cls");
 	}

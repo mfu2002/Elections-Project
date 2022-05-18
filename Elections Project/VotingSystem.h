@@ -10,17 +10,21 @@ using namespace std;
 class VotingSystem
 {
 public:
+
+	/// <summary>
+	/// Entry point for the system.
+	/// </summary>
 	void execute();
 
 
 private:
 	/// <summary>
-	/// 
+	/// Name of the file that contains voter information. 
 	/// </summary>
 	const string voterFileName = "Voter.txt";
 
 	/// <summary>
-	/// 
+	/// Name of the file that contains candidate information. 
 	/// </summary>
 	const string candidateFileName = "Candidate.txt";
 
@@ -37,12 +41,12 @@ private:
 	char selectMenuOption();
 
 	/// <summary>
-	/// 
+	/// Creates a splash screen (logo) on the console.
 	/// </summary>
 	void splashScreen();
 
 	/// <summary>
-	/// 
+	/// Outputs information regaring each candidate on the terminal. 
 	/// </summary>
 	void displayCandidateInfo();
 
@@ -52,19 +56,19 @@ private:
 	void addVotes();
 
 	/// <summary>
-	/// 
+	/// Outputs the information regarding the candidate with the least votes. 
 	/// </summary>
 	void displayCandidateWithFewestVotes();
 
 	/// <summary>
-	/// 
+	/// Outputs the information regarding the candidate with the most votes. 
 	/// </summary>
 	void displayCandidateWithMostVotes();
 
 	/// <summary>
-	/// Loads voter data 
+	/// Loads voter data into memory.
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>A collection of all the voters.</returns>
 	vector<Voter> loadVoterData();
 	/// <summary>
 	/// Loads the candidate data into memory.
@@ -96,9 +100,7 @@ private:
 	void addCandidate();
 
 	/// <summary>
-	/// 
+	/// Creates a loading animation
 	/// </summary>
-	/// <param name="length"></param>
-	void delay(int length);
+	void splash();
 };
-
