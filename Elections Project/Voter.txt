@@ -1,6 +1,6 @@
-1        1Faisal                        Karim                         Hampton                       3976
-2        1Kanzah                        Fatima                        Sunshine                      8524
-3        1Karim                         Mohammad                      Oakleigh                      7412
-4        1Kelly                         Williams                      Box Hill                      3128
-14        0Elsa                          Jones                         Malvern                       3144
-12        1Amanda                        Cynthia                       Moorabin                      3189
+01        1Faisal                        Karim                         Hampton                       3976
+02        1Kanzah                        Fatima                        Sunshine                      8524
+03        1Karim                         Mohammad                      Oakleigh                      7412
+04        1Kelly                         Williams                      Box-Hill                      3128
+05        1Bob                           Mortimer                      Bon-beach                     3156
+06        1Sally                         Ferguson                      Kew                           3172
