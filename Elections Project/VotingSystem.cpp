@@ -158,7 +158,7 @@ char VotingSystem::selectMenuOption()
 	{
 		cout << "Unknown selection, please try again";
 
-		Sleep(1000); //Stops the tread for 1sec for the user to read. 
+		Sleep(600); //Stops the tread for 1sec for the user to read. 
 
 
 		system("cls");
@@ -226,7 +226,7 @@ void VotingSystem::displayCandidateWithFewestVotes() {
 		}
 	}
 
-	cout << "Candidate id: " << leastVotedCandidate->candidateId << " (" << leastVotedCandidate->firstName << " " << leastVotedCandidate->lastName << ") has the least number of votes(votes: " << leastVotedCandidate->votes << ").";
+	cout << "Candidate id: " << leastVotedCandidate->candidateId << " (" << leastVotedCandidate->firstName << " " << leastVotedCandidate->lastName << ") has the least number of votes(votes: " << leastVotedCandidate->votes << ")." << endl;
 
 }
 void VotingSystem::displayCandidateWithMostVotes() {
@@ -251,7 +251,7 @@ void VotingSystem::displayCandidateWithMostVotes() {
 		}
 	}
 
-	cout << "Candidate id: " << mostVotedCandidate->candidateId << " (" << mostVotedCandidate->firstName << " " << mostVotedCandidate->lastName << ") has the most number of votes (votes: " << mostVotedCandidate->votes << ").";
+	cout << "Candidate id: " << mostVotedCandidate->candidateId << " (" << mostVotedCandidate->firstName << " " << mostVotedCandidate->lastName << ") has the most number of votes (votes: " << mostVotedCandidate->votes << ")." << endl;
 
 }
 
