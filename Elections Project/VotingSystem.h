@@ -89,13 +89,13 @@ private:
 
 	/// <summary>
 	/// Gets voter info from the user and adds it to the file.
-	/// -- For internal use only. 
+	/// This functions will not be exposed to the end user. Only used for debugging and development purposes. 
 	/// </summary>
 	void addVoter();
 
 	/// <summary>
 	/// Gets candidate info from the user and adds it to the file.
-	/// -- For internal use only.
+	/// This functions will not be exposed to the end user. Only used for debugging and development purposes. 
 	/// </summary>
 	void addCandidate();
 

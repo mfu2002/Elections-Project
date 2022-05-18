@@ -6,7 +6,8 @@
 #include <Windows.h>
 #include <dos.h>
 
-//Imports the correct file depending on whether the software is running on windows or linux. 
+//Imports the correct file depending on whether the software is running on windows or linux.
+// Used for the sleep function. 
 #ifdef _WIN32
 #include <Windows.h>
 #else
@@ -218,7 +219,7 @@ void VotingSystem::addVotes() {
 
 	int voterFileRecordLocation = findRecordWithId(voterId.c_str(), &voterFile, Voter::totalRowSize, Voter::voterIdSize);
 
-
+	// Makes sure the voter is in the file.
 	while (voterFileRecordLocation == -1)
 	{
 		cout << "Invalid voter id. Please try again: ";
@@ -246,7 +247,8 @@ void VotingSystem::addVotes() {
 	fstream candidateFile(candidateFileName);
 
 	int candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
-
+	
+	//Ensures the candidate id is valid. 
 	while (candidateFileRecordLocation == -1)
 	{
 		cout << "Invalid candidate id. Please try again: ";
@@ -256,24 +258,29 @@ void VotingSystem::addVotes() {
 	}
 
 
-
+	// Sets the voter's status as voted. 
 	voterFile.seekg(votedBitLocation);
 	voterFile << '1';
 
 
+	//Finds and reads the candidate's number of votes.
 	int votesLocation = candidateFileRecordLocation + Candidate::candidateIdSize;
-	char* votesChar = new char[Candidate::votesSize +1 ];
+	char* votesChar = new char[Candidate::votesSize +1 ]; //buffer larger than the input to later clear the garbage data at the end of the buffer. 
 	candidateFile.seekg(votesLocation);
 	candidateFile.read(votesChar, Candidate::votesSize);
-	votesChar[Candidate::votesSize] = 0;
+	votesChar[Candidate::votesSize] = 0; //clears the garbage data at the of the buffer. 
 	strStrip(votesChar);
 	int votes = stoi(votesChar);
+
+	//increments the votes.
 	votes++;
 
+	//writes the number of votes back to file. 
 	candidateFile.seekg(votesLocation);
 	candidateFile << setfill(' ') << left
 		<< setw(Candidate::votesSize) << votes;
 
+	//clean up.
 	delete[] votesChar;
 	voterFile.close();
 	candidateFile.close();
@@ -310,6 +317,8 @@ void VotingSystem::addVoter() {
 
 	header();
 
+	//inputs from user.
+	//Not heavily validated as they are for development purposes only. 
 	Voter voter = Voter();
 	cout << "Voter Id: ";
 	cin >> voter.voterId;
@@ -332,7 +341,7 @@ void VotingSystem::addVoter() {
 
 	voter.voted = voted == '1';
 
-
+	// writes input to files. 
 	ofstream voterFile(voterFileName, ios_base::app);
 	voterFile << setfill(' ') << left
 		<< setw(Voter::voterIdSize) << voter.voterId
@@ -348,6 +357,9 @@ void VotingSystem::addCandidate() {
 
 	header();
 
+
+	//inputs from user.
+	//Not heavily validated as they are for development purposes only.
 	Candidate candidate = Candidate();
 	cout << "Candidate Id: ";
 	cin >> candidate.candidateId;
@@ -367,7 +379,7 @@ void VotingSystem::addCandidate() {
 
 	candidate.votes = 0;
 
-
+	// writes input to files. 
 	ofstream candidateFile(candidateFileName, ios_base::app);
 	candidateFile << setfill(' ') << left
 		<< setw(Candidate::candidateIdSize) << candidate.candidateId
@@ -384,13 +396,18 @@ void VotingSystem::addCandidate() {
 vector<Voter> VotingSystem::loadVoterData() {
 	fstream voterFile(voterFileName);
 	vector<Voter> voters = vector<Voter>();
+	// buffers were created with +1 size to later delete the corrupted end. 
 	char* id = new char[Voter::voterIdSize + 1];
 	char* firstName = new char[Voter::firstNameSize + 1];
 	char* lastName = new char[Voter::lastNameSize + 1];
 	char* suburb = new char[Voter::suburbSize + 1];
+
+
 	while (voterFile.peek() != -1) {
 		Voter voter = Voter();
 	
+		// reads information from the file. 
+
 		voterFile.read(id, Voter::voterIdSize);
 
 		char votedBit[1];
@@ -402,23 +419,28 @@ vector<Voter> VotingSystem::loadVoterData() {
 		voterFile.read(suburb, Voter::suburbSize);
 		voterFile.read(voter.postcode, Voter::postcodeSize);
 
+		//deletes the corrupted ending.
 		id[Voter::voterIdSize] = 0;
 		firstName[Voter::firstNameSize] = 0;
 		lastName[Voter::lastNameSize] = 0;
 		suburb[Voter::suburbSize] = 0;
 
-
+		//Removes the empty spaces from the char array
 		strStrip(id);
 		strStrip(firstName);
 		strStrip(lastName);
 		strStrip(suburb);
 
+
+		//copies the char buffer array to the object's values.
 		strcpy_s(voter.voterId, id);
 		strcpy_s(voter.firstName, firstName);
 		strcpy_s(voter.lastName, lastName);
 		strcpy_s(voter.suburb, suburb);
 
 		voterFile.ignore();
+
+		// adds the voter to the array.
 		voters.push_back(voter);
 
 	}
@@ -429,6 +451,7 @@ vector<Voter> VotingSystem::loadVoterData() {
 vector<Candidate> VotingSystem::loadCandidateData() {
 	ifstream candidateFile(candidateFileName);
 	vector<Candidate> candidates = vector<Candidate>();
+	// buffers were created with +1 size to later delete the corrupted end. 
 	char* id = new char[Candidate::candidateIdSize +1];
 	char* firstName = new char[Candidate::firstNameSize+1];
 	char* lastName = new char[Candidate::lastNameSize + 1];
@@ -436,6 +459,7 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 	while (candidateFile.peek() != -1) {
 		Candidate candidate = Candidate();
 
+		// reads information from the file. 
 		candidateFile.read(id, Candidate::candidateIdSize);
 
 		char votesChar[Candidate::votesSize];
@@ -447,17 +471,19 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 		candidateFile.read(suburb, Candidate::suburbSize);
 		candidateFile.read(candidate.postcode, Candidate::postcodeSize);
 
+		//deletes the corrupted ending.
 		id[Candidate::candidateIdSize] = 0;
 		firstName[Candidate::firstNameSize] = 0;
 		lastName[Candidate::lastNameSize] = 0;
 		suburb[Candidate::suburbSize] = 0;
 		
-
+		//Removes the empty spaces from the char array
 		strStrip(id);
 		strStrip(firstName);
 		strStrip(lastName);
 		strStrip(suburb);
 
+		//copies the char buffer array to the object's values.
 		strcpy_s(candidate.candidateId, id);
 		strcpy_s(candidate.firstName, firstName);
 		strcpy_s(candidate.lastName, lastName);
@@ -465,6 +491,7 @@ vector<Candidate> VotingSystem::loadCandidateData() {
 
 		candidateFile.ignore();
 
+		// adds the voter to the array.
 		candidates.push_back(candidate);
 	}
 	delete[] id, firstName, lastName, suburb;
