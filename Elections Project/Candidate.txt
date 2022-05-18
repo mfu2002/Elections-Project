@@ -1,4 +1,4 @@
-15        1         Obama                         Barack                        Hampton                       3976
+15        2         Obama                         Barack                        Hampton                       3976
 75        0         Donald                        Trump                         8527                          7418
 10        1         Faisal                        Karim                         Park                          8795
 12        0         Walter                        Habenero                      Camberwell                    3124

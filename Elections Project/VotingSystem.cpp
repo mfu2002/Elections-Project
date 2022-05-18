@@ -226,7 +226,7 @@ void VotingSystem::displayCandidateWithFewestVotes() {
 		}
 	}
 
-	cout << "Candidate with id: " << leastVotedCandidate->candidateId << " has the least number of votes (votes: " << leastVotedCandidate->votes << ").";
+	cout << "Candidate id: " << leastVotedCandidate->candidateId << " (" << leastVotedCandidate->firstName << " " << leastVotedCandidate->lastName << ") has the least number of votes(votes: " << leastVotedCandidate->votes << ").";
 
 }
 void VotingSystem::displayCandidateWithMostVotes() {
@@ -251,7 +251,7 @@ void VotingSystem::displayCandidateWithMostVotes() {
 		}
 	}
 
-	cout << "Candidate with id: " << mostVotedCandidate->candidateId << " has the most number of votes (votes: " << mostVotedCandidate->votes << ").";
+	cout << "Candidate id: " << mostVotedCandidate->candidateId << " (" << mostVotedCandidate->firstName << " " << mostVotedCandidate->lastName << ") has the most number of votes (votes: " << mostVotedCandidate->votes << ").";
 
 }
 
