@@ -13,7 +13,6 @@ void delay(int length);
 void VotingSystem::execute() {
 
 	splashScreen();
-	int one = 0; // workaround for case p
 	char option = -1;
 
 	while (option != 'Q')
@@ -22,8 +21,7 @@ void VotingSystem::execute() {
 		switch (option)
 		{
 		case 'P':
-			displayCandidateInfo(one);
-			one++;
+			displayCandidateInfo();
 			break;
 		case 'A':
 			addVotes();
@@ -191,24 +189,20 @@ void header()
 	SetConsoleTextAttribute(D, 7);
 }
 
-void VotingSystem::displayCandidateInfo(int one) {
-	
+void VotingSystem::displayCandidateInfo() {
+
 	header();
 	//gets to here
 	vector<Candidate> CandidateData = loadCandidateData();
-		if (one == 0) {
-			int count = 0;
-			while (count < CandidateData.size()) {
-		
-				//cout << candidateInfo[count].firstName; // for testing
-				//cout << "test";
-				cout << "Candidate ID: " << CandidateData[count].candidateId << "\nCandidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
-				<< "Candidate Votes: \n" << CandidateData[count].votes << "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << endl;
+	int count = 0;
+	while (count < CandidateData.size()) {
+		cout << "Candidate " << count +1 << "\nCandidate ID: " << CandidateData[count].candidateId << "\nCandidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
+			<< "Candidate Votes: " << CandidateData[count].votes << "\nCandidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << endl;
 
 
-				count++;
-			}
-		}
+		count++;
+	}
+
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
 
