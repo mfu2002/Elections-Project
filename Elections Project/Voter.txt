@@ -1,6 +1,6 @@
-01        1Faisal                        Karim                         Hampton                       3976
-02        1Kanzah                        Fatima                        Sunshine                      8524
-03        1Karim                         Mohammad                      Oakleigh                      7412
-04        1Kelly                         Williams                      Box-Hill                      3128
-05        1Bob                           Mortimer                      Bon-beach                     3156
-06        1Sally                         Ferguson                      Kew                           3172
+01        0Faisal                        Karim                         Hampton                       3976
+02        0Kanzah                        Fatima                        Sunshine                      8524
+03        0Karim                         Mohammad                      Oakleigh                      7412
+04        0Kelly                         Williams                      Box-Hill                      3128
+05        0Bob                           Mortimer                      Bon-beach                     3156
+06        0Sally                         Ferguson                      Kew                           3172
