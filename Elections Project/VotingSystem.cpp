@@ -74,7 +74,7 @@ void splash() //loading animation
 
 	for (int i = 0; i < 32; i++)
 	{
-		delay(9);
+		delay(5);
 		cout << x;
 	}
 
@@ -135,7 +135,8 @@ char VotingSystem::selectMenuOption()
 		result = 'A';
 		break;
 	}
-	case 'S' || 's':
+	case 'S':
+	case 's':
 		result = 'S';
 		break;
 
@@ -169,7 +170,7 @@ char VotingSystem::selectMenuOption()
 		{
 			cout << "Invalid Input - Please Try Again: ";
 
-			delay(50);
+			delay(10);
 		}
 
 		system("cls");
@@ -180,7 +181,19 @@ char VotingSystem::selectMenuOption()
 	return result;
 }
 
+void header()
+{
+	HANDLE D = GetStdHandle(STD_OUTPUT_HANDLE); //Light Blue Menu
+	SetConsoleTextAttribute(D, 3);
+
+	cout << "\t\t\t\t\t\t  FLASH INDUSTRIES" <<endl;
+
+	SetConsoleTextAttribute(D, 7);
+}
+
 void VotingSystem::displayCandidateInfo(int one) {
+	
+	header();
 	//gets to here
 	vector<Candidate> CandidateData = loadCandidateData();
 		if (one == 0) {
@@ -198,11 +211,18 @@ void VotingSystem::displayCandidateInfo(int one) {
 		}
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
+
+	header();
+
 }
 void VotingSystem::displayCandidateWithMostVotes() {
+
+	header();
 }
 
 void VotingSystem::addVotes() {
+
+	header();
 
 	string voterId;
 	string candidateId;
@@ -280,6 +300,7 @@ void VotingSystem::addVotes() {
 }
 
 int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLength, const int idLength) {
+
 	int pos = 0;
 	char* currentId = new char[idLength + 1];  // +1 because readline returns a corrupted ending.  
 	file->seekg(pos);
@@ -303,6 +324,9 @@ int VotingSystem::findRecordWithId(const char* id, fstream* file, int recordLeng
 
 
 void VotingSystem::addVoter() {
+
+	header();
+
 	Voter voter = Voter();
 	cout << "Voter Id: ";
 	cin >> voter.voterId;
@@ -338,6 +362,9 @@ void VotingSystem::addVoter() {
 }
 
 void VotingSystem::addCandidate() {
+
+	header();
+
 	Candidate candidate = Candidate();
 	cout << "Candidate Id: ";
 	cin >> candidate.candidateId;
