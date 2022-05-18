@@ -62,35 +62,43 @@ private:
 	void displayCandidateWithMostVotes();
 
 	/// <summary>
-	/// 
+	/// Loads voter data 
 	/// </summary>
 	/// <returns></returns>
 	vector<Voter> loadVoterData();
 	/// <summary>
-	/// 
+	/// Loads the candidate data into memory.
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>A collection of all the candidates.</returns>
 	vector<Candidate> loadCandidateData();
 
 
 	/// <summary>
-	/// 
+	/// Finds the record in the database using the id.
 	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="file"></param>
-	/// <param name="recordLength"></param>
-	/// <param name="idLength"></param>
-	/// <returns></returns>
+	/// <param name="id">Record Id</param>
+	/// <param name="file">File that needs to be search.</param>
+	/// <param name="recordLength">Length of the each record in the file. (sum of the characters lengths of each field)</param>
+	/// <param name="idLength">length of the id field. </param>
+	/// <returns>returns the cursor location of the recrod.</returns>
 	int findRecordWithId(const char* id, fstream* file, int recordLength, int idLength);
 
 	/// <summary>
-	/// 
+	/// Gets voter info from the user and adds it to the file.
+	/// -- For internal use only. 
 	/// </summary>
 	void addVoter();
 
 	/// <summary>
-	/// 
+	/// Gets candidate info from the user and adds it to the file.
+	/// -- For internal use only.
 	/// </summary>
 	void addCandidate();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="length"></param>
+	void delay(int length);
 };
 

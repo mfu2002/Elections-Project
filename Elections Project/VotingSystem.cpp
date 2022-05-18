@@ -7,9 +7,6 @@
 #include <dos.h>
 using namespace std;
 
-void splash();
-void delay(int length);
-
 void VotingSystem::execute() {
 
 	splashScreen();
@@ -192,7 +189,7 @@ void header()
 void VotingSystem::displayCandidateInfo() {
 
 	header();
-	//gets to here
+
 	vector<Candidate> CandidateData = loadCandidateData();
 	int count = 0;
 	while (count < CandidateData.size()) {
