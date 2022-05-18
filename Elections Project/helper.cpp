@@ -1,3 +1,5 @@
+#include <fstream>
+using namespace std;
 
 /*
     Title: C++ Implementation to Trim Char Array of Leading/Trailing White Space Not Working As Expected
@@ -17,4 +19,13 @@ void strStrip(char* str) {
     if (end <= begin || begin == 0) return; // exit if no leading spaces or string is now empty
     str = charBuffer + begin;
     while ((*charBuffer++ = *str++));  // remove leading spaces: K&R
+}
+
+
+
+bool isFileEmpty(fstream* checkFile) {
+    checkFile->seekg(0, ios::end);
+    int endLoc = checkFile->tellg();
+    checkFile->seekg(0); //Goes to the start of the file so that other functions are not affected.
+    return endLoc == 0;
 }

@@ -52,14 +52,14 @@ void VotingSystem::splashScreen()
 {
 	string splashScreen;
 	// loads the splashscreen information from the file.
-	ifstream MyReadFile("splashScreen.txt");
+	ifstream splashScreenDataFile("splashScreen.txt");
 
-	while (getline(MyReadFile, splashScreen))
+	while (getline(splashScreenDataFile, splashScreen))
 	{
 		cout << splashScreen << endl;
 	}
 
-	MyReadFile.close();
+	splashScreenDataFile.close();
 
 	splash();
 
@@ -96,14 +96,14 @@ char VotingSystem::selectMenuOption()
 	string mainMenu;
 	char selection, result = ' ';
 
-	ifstream MyReadFile("mainMenu.txt");
+	ifstream mainMenuDataFile("mainMenu.txt");
 
-	while (getline(MyReadFile, mainMenu)) 
+	while (getline(mainMenuDataFile, mainMenu)) 
 	{
 		cout << mainMenu << endl;
 	}
 
-	MyReadFile.close();
+	mainMenuDataFile.close();
 
 	SetConsoleTextAttribute(G, 7); //Reverts Colour Back To White
 
@@ -156,7 +156,7 @@ char VotingSystem::selectMenuOption()
 	}
 	default:
 	{
-		cout << "Invalid Input - Please Try Again";
+		cout << "Unknown selection, please try again";
 
 		Sleep(1000); //Stops the tread for 1sec for the user to read. 
 
@@ -183,25 +183,76 @@ void VotingSystem::displayCandidateInfo() {
 
 	header();
 
-	vector<Candidate> CandidateData = loadCandidateData();
+	vector<Candidate> candidateData = loadCandidateData();
+
+
+	// Exits the code early if the list is empty with a message. 
+	if (candidateData.size() == 0) {
+		cout << "The list is empty.";
+		return;
+	}
+
 	int count = 0;
-	while (count < CandidateData.size()) {
-		cout << "Candidate " << count +1 << "\nCandidate ID: " << CandidateData[count].candidateId << "\nCandidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
-			<< "Candidate Votes: " << CandidateData[count].votes << "\nCandidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << endl;
+	while (count < candidateData.size()) {
+		cout << "Candidate " << count +1 << "\nCandidate ID: " << candidateData[count].candidateId << "\nCandidate name: " << candidateData[count].firstName << " " << candidateData[count].lastName << "\n"
+			<< "Candidate Votes: " << candidateData[count].votes << "\nCandidate Suburb: " << candidateData[count].suburb << "\n" << "Candidate Postcode: " << candidateData[count].postcode << "\n" << endl;
 
 
 		count++;
 	}
+
+
 
 }
 void VotingSystem::displayCandidateWithFewestVotes() {
 
 	header();
 
+	vector<Candidate> candidates = loadCandidateData();
+
+
+	if (candidates.size() == 0) {
+		cout << "Unable to determine the smallest number - list is empty";
+		return; // exits early if the list is empty;
+	}
+
+
+	Candidate* leastVotedCandidate = &candidates[0];
+
+	for (int i = 0; i < candidates.size(); i++)
+	{
+		if (candidates[i].votes < leastVotedCandidate->votes) {
+			leastVotedCandidate = &candidates[i];
+		}
+	}
+
+	cout << "Candidate with id: " << leastVotedCandidate->candidateId << " has the least number of votes (votes: " << leastVotedCandidate->votes << ").";
+
 }
 void VotingSystem::displayCandidateWithMostVotes() {
 
 	header();
+
+	vector<Candidate> candidates = loadCandidateData();
+
+
+	if (candidates.size() == 0) {
+		cout << "Unable to determine the largest number - list is empty";
+		return; // exits early if the list is empty;
+	}
+
+	
+	Candidate* mostVotedCandidate = &candidates[0];
+
+	for (int i = 0; i < candidates.size(); i++)
+	{
+		if (candidates[i].votes > mostVotedCandidate->votes) {
+			mostVotedCandidate = &candidates[i];
+		}
+	}
+
+	cout << "Candidate with id: " << mostVotedCandidate->candidateId << " has the most number of votes (votes: " << mostVotedCandidate->votes << ").";
+
 }
 
 void VotingSystem::addVotes() {
@@ -210,12 +261,23 @@ void VotingSystem::addVotes() {
 
 	string voterId;
 	string candidateId;
+	fstream voterFile(voterFileName);
+	fstream candidateFile(candidateFileName);
+
+
+	// Makes sure there is voter and candidate data to add votes. 
+	if (isFileEmpty(&voterFile) || isFileEmpty(&candidateFile)) {
+		cout << "Unable to add votes - no data";
+		return;
+	}
+
+
+
 
 	cout << "Please enter voter ID:";
 	cin >> voterId;
 
 
-	fstream voterFile(voterFileName);
 
 	int voterFileRecordLocation = findRecordWithId(voterId.c_str(), &voterFile, Voter::totalRowSize, Voter::voterIdSize);
 
@@ -237,6 +299,7 @@ void VotingSystem::addVotes() {
 	if (votedBit[0] == '1') {
 		cout << "You have already voted. You can't vote again. ";
 		voterFile.close();
+		candidateFile.close();
 		return;
 	}
 
@@ -244,7 +307,6 @@ void VotingSystem::addVotes() {
 	cout << "Please enter the candidate ID:";
 	cin >> candidateId;
 
-	fstream candidateFile(candidateFileName);
 
 	int candidateFileRecordLocation = findRecordWithId(candidateId.c_str(), &candidateFile, Candidate::totalRowSize, Candidate::candidateIdSize);
 	
@@ -285,7 +347,7 @@ void VotingSystem::addVotes() {
 	voterFile.close();
 	candidateFile.close();
 
-	cout << "Voter " << voterId << " voted for candidate " << candidateId << " successfully." << endl;
+	cout << "Candidate " << candidateId << " has "<< votes <<" votes." << endl;
 
 }
 
