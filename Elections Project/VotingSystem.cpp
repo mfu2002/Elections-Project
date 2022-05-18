@@ -202,8 +202,8 @@ void VotingSystem::displayCandidateInfo(int one) {
 		
 				//cout << candidateInfo[count].firstName; // for testing
 				//cout << "test";
-				cout << "Candidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
-				<< "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << "Candidate ID: " << CandidateData[count].candidateId << endl;
+				cout << "Candidate ID: " << CandidateData[count].candidateId << "\nCandidate name: " << CandidateData[count].firstName << " " << CandidateData[count].lastName << "\n"
+				<< "Candidate Votes: \n" << CandidateData[count].votes << "Candidate Suburb: " << CandidateData[count].suburb << "\n" << "Candidate Postcode: " << CandidateData[count].postcode << "\n" << endl;
 
 
 				count++;
